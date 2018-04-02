@@ -1,8 +1,7 @@
 #!/bin/bash
 
 if [ -z "${DAYS_RETENTION}" ]; then
-  # Default to 60 days
-  DAYS_RETENTION=60
+  DAYS_RETENTION=45
 fi
 
 # Author: Alan Fuller, Fullworks
@@ -15,6 +14,6 @@ done
 # having too many snapshots is unwiedly so this script deletes them after n days
 #
 gcloud compute snapshots list --filter="creationTimestamp<$(date -d "-${DAYS_RETENTION} days" "+%Y-%m-%d")" --regexp "(autogcs.*)" --uri | while read SNAPSHOT_URI; do
-   gcloud compute snapshots delete $SNAPSHOT_URI
+   gcloud compute snapshots delete $SNAPSHOT_URI --quiet
 done
 #
