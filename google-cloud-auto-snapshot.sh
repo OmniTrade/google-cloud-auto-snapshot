@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "${DAYS_RETENTION}" ]; then
-  DAYS_RETENTION=45
+  export DAYS_RETENTION=45
 fi
 
 # Author: Alan Fuller, Fullworks
@@ -13,7 +13,7 @@ done
 # snapshots are incremental and dont need to be deleted, deleting snapshots will merge snapshots, so deleting doesn't loose anything
 # having too many snapshots is unwiedly so this script deletes them after n days
 #
-gcloud compute snapshots list --filter="creationTimestamp<$(date -d "-${DAYS_RETENTION} days" "+%Y-%m-%d")" --filter "name~'(autogcs.*)'" --uri | while read SNAPSHOT_URI; do
+gcloud compute snapshots list --filter="creationTimestamp<$(date -d "-${DAYS_RETENTION} days" "+%Y-%m-%d") AND name~'(autogcs.*)'" --uri | while read SNAPSHOT_URI; do
    gcloud compute snapshots delete $SNAPSHOT_URI --quiet
 done
 #
