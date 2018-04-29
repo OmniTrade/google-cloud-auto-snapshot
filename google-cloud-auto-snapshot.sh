@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "${DAYS_RETENTION}" ]; then
-  export DAYS_RETENTION=45
+  export DAYS_RETENTION=20
 fi
 
 # Author: Alan Fuller, Fullworks
