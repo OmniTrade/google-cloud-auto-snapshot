@@ -6,7 +6,7 @@ fi
 
 # Author: Alan Fuller, Fullworks
 # loop through all disks within this project  and create a snapshot
-gcloud compute disks list --format='value(name,zone)'| grep data-production | while read DISK_NAME ZONE; do
+gcloud compute disks list --format='value(name,zone)'| grep -e data-production -e data-wallet-production | while read DISK_NAME ZONE; do
   gcloud compute disks snapshot $DISK_NAME --snapshot-names autogcs-${DISK_NAME:0:31}-$(date "+%Y-%m-%d-%s") --zone $ZONE
 done
 #
