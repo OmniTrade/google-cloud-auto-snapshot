@@ -9,7 +9,7 @@
 #   SLEEP=21600
 # fi
 # while true; do
-  /opt/google-cloud-auto-snapshot.sh
+  /opt/google-cloud-auto-snapshot.sh $1
 
   # if [ -n "${NOTIFY_COMMAND}" ]; then
   #   echo "Running notify command: $NOTIFY_COMMAND"
